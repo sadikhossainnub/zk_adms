@@ -83,7 +83,7 @@ app_license = "mit"
 # ------------
 
 # before_install = "zk_adms.install.before_install"
-after_install = "zk_adms.install.after_install"
+# after_install = "zk_adms.install.after_install"
 
 # Uninstallation
 # ------------
