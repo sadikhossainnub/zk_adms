@@ -1,4 +1,4 @@
-zklib2==1.0.0
-SQLAlchemy==1.4.46
+zklib==0.1.1
+emySQLAlch==1.4.46
 Flask==2.3.3
 requests==2.31.0

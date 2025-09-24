@@ -15,7 +15,7 @@ from datetime import datetime, timedelta
 from threading import Thread, Lock
 from typing import List, Dict, Optional
 from dataclasses import dataclass
-import zklib2 as zk
+from zklib import zklib
 from sqlalchemy import create_engine, Column, Integer, String, DateTime, Boolean, UniqueConstraint
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
@@ -179,7 +179,7 @@ class DeviceManager:
     def connect_device(self, device: Dict) -> Optional[object]:
         """Connect to a ZKTeco device"""
         try:
-            conn = zk.ZKLib(device['ip'], device.get('port', 4370))
+            conn = zklib.ZKLib(device['ip'], device.get('port', 4370))
             if conn.connect():
                 logging.info(f"Connected to device {device['ip']}")
                 return conn
