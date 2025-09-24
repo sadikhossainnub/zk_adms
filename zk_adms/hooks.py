@@ -83,7 +83,7 @@ app_license = "mit"
 # ------------
 
 # before_install = "zk_adms.install.before_install"
-# after_install = "zk_adms.install.after_install"
+after_install = "zk_adms.install.after_install"
 
 # Uninstallation
 # ------------
@@ -148,23 +148,13 @@ app_license = "mit"
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
-# 	"all": [
-# 		"zk_adms.tasks.all"
-# 	],
-# 	"daily": [
-# 		"zk_adms.tasks.daily"
-# 	],
-# 	"hourly": [
-# 		"zk_adms.tasks.hourly"
-# 	],
-# 	"weekly": [
-# 		"zk_adms.tasks.weekly"
-# 	],
-# 	"monthly": [
-# 		"zk_adms.tasks.monthly"
-# 	],
-# }
+scheduler_events = {
+	"cron": {
+		"*/5 * * * *": [
+			"zk_adms.tasks.mark_offline_devices"
+		]
+	}
+}
 
 # Testing
 # -------
@@ -234,6 +224,14 @@ app_license = "mit"
 # auth_hooks = [
 # 	"zk_adms.auth.validate"
 # ]
+
+# Website Routes
+website_route_rules = [
+	{"from_route": "/iclock", "to_route": "zk_adms.api.iclock"},
+]
+
+# Custom Fields
+fixtures = ["Custom Field"]
 
 # Automatically update python controller files with type annotations for this app.
 # export_python_type_annotations = True

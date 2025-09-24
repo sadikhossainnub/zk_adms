@@ -1,0 +1,11 @@
+[
+ {
+  "doctype": "Custom Field",
+  "dt": "Employee",
+  "fieldname": "device_user_id",
+  "fieldtype": "Data",
+  "label": "Device User ID",
+  "insert_after": "employee_number",
+  "description": "User ID from ZKTeco attendance device"
+ }
+]
