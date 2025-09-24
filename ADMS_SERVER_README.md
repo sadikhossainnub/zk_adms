@@ -29,7 +29,7 @@ sudo apt update
 sudo apt install python3 python3-pip sqlite3
 
 # Install required Python packages
-pip3 install pyzk SQLAlchemy Flask requests
+pip3 install zklib2 SQLAlchemy Flask requests
 ```
 
 ### Quick Setup
@@ -294,12 +294,14 @@ tar -czf adms_backup_$(date +%Y%m%d).tar.gz adms_config.json *.service *.py
 
 ### Test Device Connection
 ```python
-from zk import ZK
+import zklib2 as zk
 
-zk = ZK('192.168.1.201', port=4370, timeout=5)
-conn = zk.connect()
-print("Connected successfully")
-conn.disconnect()
+conn = zk.ZKLib('192.168.1.201', 4370)
+if conn.connect():
+    print("Connected successfully")
+    conn.disconnect()
+else:
+    print("Connection failed")
 ```
 
 ### Test ERPNext API

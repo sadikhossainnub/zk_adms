@@ -15,7 +15,7 @@ from datetime import datetime, timedelta
 from threading import Thread, Lock
 from typing import List, Dict, Optional
 from dataclasses import dataclass
-from zk import ZK
+import zklib2 as zk
 from sqlalchemy import create_engine, Column, Integer, String, DateTime, Boolean, UniqueConstraint
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
@@ -176,13 +176,16 @@ class DeviceManager:
         self.db_manager = db_manager
         self.connections = {}
     
-    def connect_device(self, device: Dict) -> Optional[ZK]:
+    def connect_device(self, device: Dict) -> Optional[object]:
         """Connect to a ZKTeco device"""
         try:
-            zk = ZK(device['ip'], port=device.get('port', 4370), timeout=5)
-            conn = zk.connect()
-            logging.info(f"Connected to device {device['ip']}")
-            return conn
+            conn = zk.ZKLib(device['ip'], device.get('port', 4370))
+            if conn.connect():
+                logging.info(f"Connected to device {device['ip']}")
+                return conn
+            else:
+                logging.error(f"Failed to connect to {device['ip']}")
+                return None
         except Exception as e:
             logging.error(f"Failed to connect to {device['ip']}: {e}")
             return None
@@ -194,17 +197,24 @@ class DeviceManager:
             return []
         
         try:
+            # Enable device for data transfer
+            conn.enable_device()
+            
+            # Get attendance logs
             attendances = conn.get_attendance()
             logs = []
             
             for att in attendances:
+                # Parse attendance data based on zklib2 format
                 logs.append({
                     'device_ip': device['ip'],
-                    'user_id': str(att.user_id),
-                    'timestamp': att.timestamp,
-                    'status': 'IN' if att.status == 1 else 'OUT'
+                    'user_id': str(att['user_id']),
+                    'timestamp': att['timestamp'],
+                    'status': 'IN' if att['status'] == 1 else 'OUT'
                 })
             
+            # Disable device after data transfer
+            conn.disable_device()
             conn.disconnect()
             logging.info(f"Fetched {len(logs)} logs from {device['ip']}")
             return logs
@@ -212,7 +222,11 @@ class DeviceManager:
         except Exception as e:
             logging.error(f"Error fetching logs from {device['ip']}: {e}")
             if conn:
-                conn.disconnect()
+                try:
+                    conn.enable_device()
+                    conn.disconnect()
+                except:
+                    pass
             return []
     
     def fetch_all_devices(self) -> List[Dict]:
