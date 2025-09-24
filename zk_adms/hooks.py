@@ -228,6 +228,8 @@ scheduler_events = {
 # Website Routes
 website_route_rules = [
 	{"from_route": "/iclock", "to_route": "zk_adms.api.iclock"},
+	{"from_route": "/iclock/cdata", "to_route": "zk_adms.api.iclock"},
+	{"from_route": "/iclock/getrequest", "to_route": "zk_adms.api.iclock"},
 ]
 
 # Custom Fields

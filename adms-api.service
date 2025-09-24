@@ -1,0 +1,17 @@
+[Unit]
+Description=ADMS API Server
+After=network.target
+
+[Service]
+Type=simple
+User=frappe
+Group=frappe
+WorkingDirectory=/home/primetechbd/frappe-bench/apps/zk_adms
+ExecStart=/usr/bin/python3 /home/primetechbd/frappe-bench/apps/zk_adms/adms_server.py --config /home/primetechbd/frappe-bench/apps/zk_adms/adms_config.json --api-only
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
