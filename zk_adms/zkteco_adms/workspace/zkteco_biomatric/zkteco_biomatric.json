@@ -1,0 +1,58 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"X94rmOzps-\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">ZKTeco Biomatric</span>\",\"col\":12}},{\"id\":\"bFWsE_RRJ4\",\"type\":\"card\",\"data\":{\"card_name\":\"ZKTeco\",\"col\":4}}]",
+ "creation": "2025-09-23 16:44:10.895737",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "idx": 0,
+ "indicator_color": "green",
+ "is_hidden": 0,
+ "label": "ZKTeco Biomatric",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "ZKTeco",
+   "link_count": 2,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Attendance Device",
+   "link_count": 0,
+   "link_to": "Attendance Device",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "ZK Log",
+   "link_count": 0,
+   "link_to": "ZK Log",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2025-09-24 15:38:15.860379",
+ "modified_by": "Administrator",
+ "module": "ZKTeco ADMS",
+ "name": "ZKTeco Biomatric",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 39.0,
+ "shortcuts": [],
+ "title": "ZKTeco Biomatric"
+}
