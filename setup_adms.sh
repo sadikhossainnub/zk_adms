@@ -19,7 +19,18 @@ fi
 
 # Install Python dependencies
 echo "Installing Python dependencies..."
-pip3 install --user -r "$SCRIPT_DIR/requirements_adms.txt"
+
+# Check if virtual environment exists, create if not
+if [ ! -d "$SCRIPT_DIR/venv" ]; then
+    echo "Creating virtual environment..."
+    python3 -m venv "$SCRIPT_DIR/venv"
+fi
+
+# Activate virtual environment and install dependencies
+echo "Installing dependencies in virtual environment..."
+source "$SCRIPT_DIR/venv/bin/activate"
+pip install -r "$SCRIPT_DIR/requirements_adms.txt"
+deactivate
 
 # Make scripts executable
 echo "Setting up permissions..."

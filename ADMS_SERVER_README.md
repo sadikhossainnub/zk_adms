@@ -29,7 +29,7 @@ sudo apt update
 sudo apt install python3 python3-pip sqlite3
 
 # Install required Python packages
-pip3 install zklib2 SQLAlchemy Flask requests
+pip3 install zklib SQLAlchemy Flask requests
 ```
 
 ### Quick Setup
@@ -294,9 +294,9 @@ tar -czf adms_backup_$(date +%Y%m%d).tar.gz adms_config.json *.service *.py
 
 ### Test Device Connection
 ```python
-import zklib2 as zk
+from zklib import zklib
 
-conn = zk.ZKLib('192.168.1.201', 4370)
+conn = zklib.ZKLib('192.168.1.201', 4370)
 if conn.connect():
     print("Connected successfully")
     conn.disconnect()

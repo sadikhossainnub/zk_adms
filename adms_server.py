@@ -197,24 +197,25 @@ class DeviceManager:
             return []
         
         try:
-            # Enable device for data transfer
-            conn.enable_device()
+            # Disable device for data transfer
+            conn.disable_device()
             
             # Get attendance logs
             attendances = conn.get_attendance()
             logs = []
             
-            for att in attendances:
-                # Parse attendance data based on zklib2 format
-                logs.append({
-                    'device_ip': device['ip'],
-                    'user_id': str(att['user_id']),
-                    'timestamp': att['timestamp'],
-                    'status': 'IN' if att['status'] == 1 else 'OUT'
-                })
+            if attendances:
+                for att in attendances:
+                    # Parse attendance data based on zklib format
+                    logs.append({
+                        'device_ip': device['ip'],
+                        'user_id': str(att[0]),  # User ID
+                        'timestamp': att[1],      # Timestamp
+                        'status': 'IN' if att[2] == 1 else 'OUT'  # Status
+                    })
             
-            # Disable device after data transfer
-            conn.disable_device()
+            # Enable device after data transfer
+            conn.enable_device()
             conn.disconnect()
             logging.info(f"Fetched {len(logs)} logs from {device['ip']}")
             return logs
