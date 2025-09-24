@@ -1,6 +1,7 @@
 [
  {
   "doctype": "Custom Field",
+  "name": "Employee-device_user_id",
   "dt": "Employee",
   "fieldname": "device_user_id",
   "fieldtype": "Data",
